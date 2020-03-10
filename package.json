@@ -6,13 +6,13 @@
   "scripts": {
     "client-install": "npm install --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"node server.js\" \"npm run client\"",
+    "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "build": "cd client && npm build",
     "install-client": "cd client && npm install",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "npm run install-client && npm run bild"
+    "heroku-postbuild": "npm run install-client && npm run build"
   },
   "author":"Nnajiofor Emmmanuel",
   "license": "MIT",
