@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 // const bodyParser = require('body-parser');
 const path = require('path')
-
+const config = require('config')
 
 
 const app = express(); 
@@ -12,8 +12,7 @@ const app = express();
 app.use(express.json());
 
 //DB config
-const DbConfig = require('./config/keys').uri
-const uri = process.env.MONGODB_URI || "mongodb+srv://Emik:Test1234@cluster0-tipko.mongodb.net/test?retryWrites=true&w=majority";
+const DbConfig = config.get('mongoURI')
 
 
 //connect DB config
@@ -29,6 +28,7 @@ mongoose.connect(DbConfig, { useNewUrlParser: true, useUnifiedTopology: true, us
 //use route   
 app.use('/api/items', require('./routes/api/items'))
 app.use('/api/users', require('./routes/api/users'))
+app.use('/api/auth', require('./routes/api/auth'))
 
 //serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

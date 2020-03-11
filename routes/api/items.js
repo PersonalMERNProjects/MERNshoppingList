@@ -1,15 +1,15 @@
 const express = require('express')
 const router = express.Router();
-
+const auth = require('../../middleware/auth')
 
 //Item Model
 const Item = require('../../models/Item')
 
 //@route GET api/items
 //@desc GET All Items
-//@access Public
+//@access Private
 
-router.get('/', (req, res) => {
+router.get('/', auth, (req, res) => {
     Item.find()
         .sort({date: -1})
         .then((items) => {
@@ -24,17 +24,16 @@ router.get('/', (req, res) => {
                 success: false,
                 message: "Query operation failed!",
                 status_code: 404
-
             })
         })
 }) 
 
 
 //@route Post/ create api/items
-//@desc Post/ create an Items
-//@access Public
+//@desc Post/ create an Item
+//@access Private
 
-router.post('/', (req, res) => {
+router.post('/', auth,(req, res) => {
     const newItem = new Item({
       name: req.body.name  
     });
@@ -61,9 +60,9 @@ router.post('/', (req, res) => {
 
 //@route Delete api/items
 //@desc Delete Item
-//@access Public
+//@access Private
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', auth, (req, res) => {
     Item.findById(req.params.id)
         .then((item) => {
             item.remove()
@@ -71,7 +70,9 @@ router.delete('/:id', (req, res) => {
         .then(() => {
             res.json({
                 success: true,
-                message: "Item deleted Successfully!"
+                message: "Item deleted Successfully!",
+                status_code: 200
+
                 
             });
         })
@@ -79,8 +80,34 @@ router.delete('/:id', (req, res) => {
             res.status(404).json({
                 success: false,
                 message: "Delete operation failed!",
+                status_code: 404
+
         })
     })
+}) 
+
+//@route get single item api/items
+//@desc get single Item
+//@access Private
+
+router.get('/:id', auth, (req, res) => {
+    Item.findById(req.params.id)
+        .then((item) => {
+            res.json({
+                item: item,
+                success: true,
+                message: "Item retrieved Successfully!",
+                status_code: 200
+            });
+        })
+        .catch((err) => {
+            res.status(404).json({
+                success: false,
+                message: "retrieve operation failed!",
+                status_code: 404
+
+            })
+        })
 }) 
  
 
