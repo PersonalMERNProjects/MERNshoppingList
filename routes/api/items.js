@@ -22,7 +22,9 @@ router.get('/', (req, res) => {
         .catch((err) => {
             res.status(404).json({
                 success: false,
-                message: "Query operation failed!"
+                message: "Query operation failed!",
+                status_code: 404
+
             })
         })
 }) 
@@ -50,7 +52,8 @@ router.post('/', (req, res) => {
             res.status(500).json({
                 success: false,
                 message: "Create operation failed!",
-            
+                status_code: 500
+
             })
         })
     

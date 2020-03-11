@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 // const bodyParser = require('body-parser');
-const items = require('./routes/api/items');
 const path = require('path')
 
 
@@ -14,9 +13,11 @@ app.use(express.json());
 
 //DB config
 const DbConfig = require('./config/keys').uri
-const uri= process.env.MONGODB_URI || "mongodb+srv://Emik:Test1234@cluster0-tipko.mongodb.net/test?retryWrites=true&w=majority" 
+const uri = process.env.MONGODB_URI || "mongodb+srv://Emik:Test1234@cluster0-tipko.mongodb.net/test?retryWrites=true&w=majority";
+
+
 //connect DB config
-mongoose.connect(DbConfig, { useNewUrlParser: true, useUnifiedTopology: true, })
+mongoose.connect(DbConfig, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true })
     .then(() => {
         console.log('mongoDB connected')
     })
@@ -26,7 +27,8 @@ mongoose.connect(DbConfig, { useNewUrlParser: true, useUnifiedTopology: true, })
 
     
 //use route   
-app.use('/api/items', items)
+app.use('/api/items', require('./routes/api/items'))
+app.use('/api/users', require('./routes/api/users'))
 
 //serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
