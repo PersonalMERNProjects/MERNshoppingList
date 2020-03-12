@@ -88,6 +88,4 @@ router.get('/user', auth, (req, res) => {
         .then((user) => res.json(user))
 })
 
-//add a content type ox x-auth-token to postman and use a get method
-
 module.exports = router;  
