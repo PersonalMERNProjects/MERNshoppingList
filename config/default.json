@@ -1,6 +1,6 @@
 {
-    "mongoURI" : "mongodb+srv://Emik:Test1234@cluster0-tipko.mongodb.net/test?retryWrites=true&w=majority",
-
+    
+    "mongoURI" : "mongodb://127.0.0.1:27017/test",
     "jwtSecret": "sl_myjwtSecret"
 
 }

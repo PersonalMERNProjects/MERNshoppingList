@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs')
 const config = require('config')
 const jwt = require('jsonwebtoken')
-
+const auth = require('../../middleware/auth')
 
 //User Model
 const User = require('../../models/User')
@@ -91,12 +91,12 @@ router.post('/', (req, res) => {
 
 //@route GET api/users/all
 //@desc Get all Users
-//@access Public
+//@access Private
 
-router.get('/all', (req, res) => {
+router.get('/all', auth,(req, res) => {
     User.find()
         .sort({ register_date: -1 })
-        // .select('-password')
+        .select('-password')
         .then((users) => {
             res.status(200).json({
                 data: users,
