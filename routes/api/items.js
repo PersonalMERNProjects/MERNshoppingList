@@ -9,15 +9,15 @@ const Item = require('../../models/Item')
 //@desc GET All Items
 //@access Private
 
-router.get('/', auth, (req, res) => {
+router.get('/', (req, res) => {
     Item.find()
-        .sort({date: -1})
+        .sort({ date: -1 })
         .then((items) => {
             res.json({
                 items: items,
                 status: "ok",
                 status_code: 200
-        })
+            })
         })
         .catch((err) => {
             res.status(404).json({
@@ -26,16 +26,16 @@ router.get('/', auth, (req, res) => {
                 status_code: 404
             })
         })
-}) 
+})
 
 
 //@route Post/ create api/items
 //@desc Post/ create an Item
 //@access Private
 
-router.post('/', auth,(req, res) => {
+router.post('/', auth, (req, res) => {
     const newItem = new Item({
-      name: req.body.name  
+        name: req.body.name
     });
 
     newItem.save()
@@ -55,8 +55,8 @@ router.post('/', auth,(req, res) => {
 
             })
         })
-    
-}) 
+
+})
 
 //@route Delete api/items
 //@desc Delete Item
@@ -73,7 +73,7 @@ router.delete('/:id', auth, (req, res) => {
                 message: "Item deleted Successfully!",
                 status_code: 200
 
-                
+
             });
         })
         .catch((err) => {
@@ -82,9 +82,9 @@ router.delete('/:id', auth, (req, res) => {
                 message: "Delete operation failed!",
                 status_code: 404
 
+            })
         })
-    })
-}) 
+})
 
 //@route get single item api/items
 //@desc get single Item
@@ -108,8 +108,8 @@ router.get('/:id', auth, (req, res) => {
 
             })
         })
-}) 
- 
+})
+
 
 
 

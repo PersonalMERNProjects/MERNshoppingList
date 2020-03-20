@@ -5,39 +5,39 @@ import { addItem } from '../actions/itemActions';
 
 
 
-class itemModal extends Component {
+class ItemModal extends Component {
     state = {
         modal: false,
         name: ''
     }
     toggle = () => {
         this.setState({
-            modal:!this.state.modal
+            modal: !this.state.modal
         })
     }
     onChange = (e) => {
-        this.setState({[e.target.name]: e.target.value})
+        this.setState({ [e.target.name]: e.target.value })
     }
     onSubmit = (e) => {
         e.preventDefault()
 
         const newItem = {
-            name: this.state.name 
+            name: this.state.name
         }
         //Add item via addItem Action
         this.props.addItem(newItem)
 
 
         //close modal
-        this.toggle(); 
+        this.toggle();
     }
     render() {
         return (
             <div>
                 <Button color="dark" style={{ marginBottom: '2rem' }}
-                onClick={this.toggle}>
+                    onClick={this.toggle}>
                     Add Item
-               </Button>  
+               </Button>
                 <Modal isOpen={this.state.modal} toggle={this.toggle}>
                     <ModalHeader toggle={this.toggle}>Add To Shopping List</ModalHeader>
                     <ModalBody>
@@ -49,8 +49,8 @@ class itemModal extends Component {
                                     placeholder="Add Shopping item"
                                     onChange={this.onChange} />
                                 <Button color="dark" style={{ marginTop: '2rem' }}
-                                block>Add Item</Button>
-                           </FormGroup> 
+                                    block>Add Item</Button>
+                            </FormGroup>
                         </Form>
                     </ModalBody>
                 </Modal>
@@ -63,4 +63,4 @@ const mapStateToProps = (state) => ({
 })
 
 
-export default connect(mapStateToProps, {addItem})(itemModal)
+export default connect(mapStateToProps, { addItem })(ItemModal)

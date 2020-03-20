@@ -1,9 +1,13 @@
 import { combineReducers } from 'redux'
 import itemReducer from './itemReducer';
+import errorReducer from './errorReducer';
+import authReducer from './authReducer';
 
 
 export default combineReducers({
-    item: itemReducer
+    item: itemReducer,
+    error: errorReducer,
+    auth: authReducer
 })
 
 // C:\Program Files\MongoDB\Server\4.2\data\
