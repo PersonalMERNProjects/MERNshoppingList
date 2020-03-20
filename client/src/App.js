@@ -5,7 +5,7 @@ import AppNavbar from './components/AppNavbar'
 import ShoppingList from './components/ShoppingList'
 import { Provider } from 'react-redux';
 import store from './store';
-import ItemModal from './components/itemModal'
+import ItemModal from './components/ItemModal'
 import { Container } from 'reactstrap';
 import { loadUser } from './actions/authActions'
 

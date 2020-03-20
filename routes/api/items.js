@@ -47,12 +47,12 @@ router.post('/', auth, (req, res) => {
                 status_code: 200
             })
         })
-        .catch((err) => {
+        .catch((error) => {
             res.status(500).json({
                 success: false,
                 message: "Create operation failed!",
-                status_code: 500
-
+                status_code: 500,
+                error: error
             })
         })
 
