@@ -29,7 +29,7 @@ class ItemModal extends Component {
 
 
         //close modal
-        // this.toggle();
+        this.toggle();
     }
     render() {
         return (
