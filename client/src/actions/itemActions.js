@@ -1,5 +1,6 @@
 import { GET_ITEMS, ADD_ITEM, DELETE_ITEM, ITEMS_LOADING } from './types'
-import axios from 'axios'
+import axios from 'axios';
+import { tokenConfig } from './authActions'
 
 
 
@@ -12,19 +13,19 @@ export const getItems = () => dispatch => {
         })
     )
         .catch((err) => {
-        console.error("fetch failed", err)
-    })
-    
+            console.error("fetch failed", err)
+        })
+
 }
-export const addItem = (item) => dispatch =>{
-    axios.post('/api/items', item)
+export const addItem = (item) => (dispatch, getState) => {
+    axios.post('/api/items', item, tokenConfig(getState))
         .then((res) => {
             dispatch({
                 type: ADD_ITEM,
                 payload: res.data
             })
-    })
-}   
+        })
+}
 
 
 export const deleteItem = (id) => dispatch => {
@@ -35,7 +36,7 @@ export const deleteItem = (id) => dispatch => {
                 payload: id
             })
         })
-} 
+}
 
 
 
